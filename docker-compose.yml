@@ -1,0 +1,10 @@
+services:
+  factorio-server:
+  #  image: ghcr.io/pvlkrc/minecraft-server-fabric:latest
+    container_name: factorio_server
+    restart: unless-stopped
+    ports:
+      - "34197:34197/udp"
+      - "34196:34196/udp"
+    volumes:
+      - ./server-settings.json:/factorio/factorio/data/server-settings.example.json

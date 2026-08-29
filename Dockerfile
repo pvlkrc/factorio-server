@@ -1,16 +1,21 @@
-FROM alpine:3.23.5
+FROM debian:bookworm-slim
 
 
 WORKDIR /factorio
 
-RUN apk update --no-cache \
-    && apk add curl
+RUN apt update \
+    && apt install curl xz-utils -y \
+    && rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
 RUN curl -L -o factorio.tar.gz https://factorio.com/get-download/stable/headless/linux64
-RUN tar -xf factorio.tar.gz
-RUN rm factorio.tar.gz
+
+RUN tar -xf factorio.tar.gz \ 
+    && rm factorio.tar.gz
+
+RUN chmod +x ./factorio/bin/x64/factorio
+
 COPY entrypoint.sh ./
 
-RUN apk del curl
+
 
 CMD ["sh", "entrypoint.sh"]

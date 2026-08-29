@@ -17,16 +17,15 @@ jobs:
 
       - name: Docker run
         run: |
-          docker run -d --name factorio -e EULA=true --rm ci_factorio
-          docker rm -f factorio 
+          docker run -d --name factorio --rm ci_factorio
 
-#      - name: Wait for server to start
-#        run: |
-#          i=1
-#          while [ $i -ne 12 ]; do \
-#          if docker logs mc-server 2>&1 | grep -q ": Done"; then break; else sleep 5; i=$(($i + 1)); fi; done
-#          docker rm -f mc-server
-#          if [ $i = 12 ]; then exit 1; fi;
+      - name: Wait for server to start
+        run: |
+          i=1
+          while [ $i -ne 12 ]; do \
+          if docker logs factorio 2>&1 | grep -q "Factorio initialised"; then break; else sleep 5; i=$(($i + 1)); fi; done
+          docker rm -f factorio
+          if [ $i = 12 ]; then exit 1; fi;
 
 #      - name: Push to GitHub Container Registry
 #        run: |
