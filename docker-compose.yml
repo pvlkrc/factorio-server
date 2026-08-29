@@ -1,6 +1,7 @@
 services:
   factorio-server:
     image: ghcr.io/pvlkrc/factorio-server:latest
+    platform: linux/amd64
     tty: true
     stdin_open: true
     container_name: factorio_server
