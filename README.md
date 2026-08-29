@@ -12,6 +12,7 @@ Headless Factorio dedicated server, packaged as a Docker image and run via `dock
 Starting from nothing but this repo's config files (e.g. deploying on a fresh machine):
 
 Can be run on ARM64 machines, but this system must have QEMU for x86_64 binaries enabled:
+
 docker run --rm --privileged tonistiigi/binfmt --install all
 
 
