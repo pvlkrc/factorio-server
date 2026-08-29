@@ -1,6 +1,8 @@
 services:
   factorio-server:
     image: ghcr.io/pvlkrc/factorio-server:latest
+    tty: true
+    stdin_open: true
     container_name: factorio_server
     restart: unless-stopped
     ports:
@@ -8,3 +10,4 @@ services:
       - "34196:34196/udp"
     volumes:
       - ./server-settings.json:/factorio/factorio/data/server-settings.example.json
+      - ./saves:/factorio/saves
