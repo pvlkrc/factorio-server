@@ -27,11 +27,11 @@ jobs:
           docker rm -f factorio
           if [ $i = 12 ]; then exit 1; fi;
 
-#      - name: Push to GitHub Container Registry
-#        run: |
-#          VERSION=$(cat VERSION)
-#          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-#          docker tag ci_mc_server ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:latest
-#          docker tag ci_mc_server ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:$VERSION
-#          docker push ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:$VERSION
-#          docker push ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:latest
+      - name: Push to GitHub Container Registry
+        run: |
+          VERSION=$(cat VERSION)
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker tag ci_factorio ghcr.io/${{ github.repository_owner }}/factorio-server:latest
+          docker tag ci_factorio ghcr.io/${{ github.repository_owner }}/factorio-server:$VERSION
+          docker push ghcr.io/${{ github.repository_owner }}/factorio-server:$VERSION
+          docker push ghcr.io/${{ github.repository_owner }}/factorio-server:latest
