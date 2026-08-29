@@ -1,6 +1,6 @@
 services:
   factorio-server:
-  #  image: ghcr.io/pvlkrc/minecraft-server-fabric:latest
+    image: ghcr.io/pvlkrc/factorio-server:latest
     container_name: factorio_server
     restart: unless-stopped
     ports:
