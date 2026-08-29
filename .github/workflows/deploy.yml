@@ -1,0 +1,38 @@
+name: Deploy factorio server
+on: [push]
+
+jobs:
+  BuildAndPushContainer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: CheckOut
+        uses: actions/checkout@v5
+        
+      - name: Dockerfile
+        run: |
+          docker build -t ci_factorio .
+
+      - name: Docker run
+        run: |
+          docker run -d --name factorio -e EULA=true --rm ci_factorio
+          docker rm -f factorio 
+
+#      - name: Wait for server to start
+#        run: |
+#          i=1
+#          while [ $i -ne 12 ]; do \
+#          if docker logs mc-server 2>&1 | grep -q ": Done"; then break; else sleep 5; i=$(($i + 1)); fi; done
+#          docker rm -f mc-server
+#          if [ $i = 12 ]; then exit 1; fi;
+
+#      - name: Push to GitHub Container Registry
+#        run: |
+#          VERSION=$(cat VERSION)
+#          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+#          docker tag ci_mc_server ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:latest
+#          docker tag ci_mc_server ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:$VERSION
+#          docker push ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:$VERSION
+#          docker push ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:latest
