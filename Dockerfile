@@ -3,11 +3,13 @@ FROM debian:bookworm-slim
 
 WORKDIR /factorio
 
+ARG VER
+
 RUN apt update \
     && apt install curl xz-utils -y \
     && rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
-RUN curl -L -o factorio.tar.gz https://factorio.com/get-download/stable/headless/linux64
+RUN curl -L -o factorio.tar.gz https://factorio.com/get-download/$VER/headless/linux64
 
 RUN tar -xf factorio.tar.gz \ 
     && rm factorio.tar.gz

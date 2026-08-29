@@ -13,7 +13,8 @@ jobs:
         
       - name: Dockerfile
         run: |
-          docker build -t ci_factorio .
+          
+          docker build --build-arg VER=$(cat VERSION) -t ci_factorio .
 
       - name: Docker run
         run: |
