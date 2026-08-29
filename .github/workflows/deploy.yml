@@ -17,7 +17,7 @@ jobs:
 
       - name: Docker run
         run: |
-          docker run -d --name factorio --rm ci_factorio
+          docker run -d -p 34197:34197/udp --name factorio --rm ci_factorio
 
       - name: Wait for server to start
         run: |
