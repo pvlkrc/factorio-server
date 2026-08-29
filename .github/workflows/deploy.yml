@@ -22,10 +22,15 @@ jobs:
       - name: Wait for server to start
         run: |
           i=1
-          while [ $i -ne 12 ]; do \
-          if docker logs factorio 2>&1 | grep -q "Factorio initialised"; then break; else sleep 5; i=$(($i + 1)); fi; done
+          while [ $i -ne 12 ]; do
+            if ss -uln | grep -q ":34197 " && docker logs factorio 2>&1 | grep -q "Factorio initialised"; then
+              break
+            else
+              sleep 5; i=$(($i + 1))
+            fi
+          done
           docker rm -f factorio
-          if [ $i = 12 ]; then exit 1; fi;
+          if [ $i = 12 ]; then exit 1; fi
 
       - name: Push to GitHub Container Registry
         run: |
