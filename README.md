@@ -11,6 +11,11 @@ Headless Factorio dedicated server, packaged as a Docker image and run via `dock
 
 Starting from nothing but this repo's config files (e.g. deploying on a fresh machine):
 
+Can be run on ARM64 machines, but this system must have QEMU for x86_64 binaries enabled:
+docker run --rm --privileged tonistiigi/binfmt --install all
+
+
+
 1. **Create a folder for the server** and put these three files from this repo into it:
    - `docker-compose.yml`
    - `server-settings.json`
@@ -85,7 +90,7 @@ docker compose down
 The image is built and published by [.github/workflows/deploy.yml](.github/workflows/deploy.yml) to `ghcr.io/pvlkrc/factorio-server`. To build and run it locally instead of pulling from the registry:
 
 ```
-docker build -t ci_factorio .
+docker build --build-arg VER=$(cat VERSION) -t ci_factorio .
 ```
 
 and point `image:` in `docker-compose.yml` to `ci_factorio` instead.
