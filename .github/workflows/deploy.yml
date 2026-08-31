@@ -34,7 +34,7 @@ jobs:
 
       - name: Check save file was created
         run: |
-          docker exec factorio test -f /factorio/saves/save.zip
+          docker exec factorio test -f /factorio/factorio/saves/save.zip
           result=$?
           docker rm -f factorio
           exit $result
