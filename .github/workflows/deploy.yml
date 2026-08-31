@@ -30,8 +30,14 @@ jobs:
               sleep 5; i=$(($i + 1))
             fi
           done
+          if [ $i = 12 ]; then docker rm -f factorio; exit 1; fi
+
+      - name: Check save file was created
+        run: |
+          docker exec factorio test -f /factorio/saves/save.zip
+          result=$?
           docker rm -f factorio
-          if [ $i = 12 ]; then exit 1; fi
+          exit $result
 
       - name: Push to GitHub Container Registry
         run: |
