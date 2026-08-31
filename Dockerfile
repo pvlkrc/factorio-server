@@ -5,7 +5,7 @@ WORKDIR /factorio
 ARG VER=2.0.77
 
 RUN apt update \
-    && apt install curl xz-utils -y --no-install-recommends \
+    && apt install curl xz-utils ca-certificates -y --no-install-recommends \
     && rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
 RUN curl -L -o factorio.tar.gz https://factorio.com/get-download/$VER/headless/linux64
