@@ -10,6 +10,6 @@ services:
       - "34197:34197/udp"
       - "34196:34196/udp"
     volumes:
-      - ./server-settings.json:/factorio/factorio/data/server-settings.example.json:ro
+      - ./server-settings.json:/factorio/factorio/data/server-settings.json:ro
       - ./mod-list.json:/factorio/factorio/mods/mod-list.json:ro
       - ./saves:/factorio/factorio/saves
