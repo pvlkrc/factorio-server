@@ -1,0 +1,7 @@
+.gitignore
+.git
+.github
+README.md
+docker-compose.yml
+server-settings.json
+mod-list.json
