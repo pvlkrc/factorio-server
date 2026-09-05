@@ -1,5 +1,4 @@
 #!/bin/sh
-
 mkdir -p ./factorio/saves
 if [ ! -f ./factorio/saves/save.zip ]; then
     ./factorio/bin/x64/factorio --create ./factorio/saves/save.zip
