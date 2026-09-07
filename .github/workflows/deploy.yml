@@ -40,6 +40,7 @@ jobs:
           exit $result
 
       - name: Push to GitHub Container Registry
+        if: github.ref == 'refs/heads/main'
         run: |
           VERSION=$(cat VERSION)
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
